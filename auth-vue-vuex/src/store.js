@@ -1,6 +1,7 @@
 import Vuex from 'vuex'
 import Vue from 'vue'
 import http from '@/http'
+import VuexPersistence from 'vuex-persist'
 
 Vue.use(Vuex)
 
@@ -43,9 +44,12 @@ const getters = {
     usuarioEstaLogado: state => Boolean(state.token)
 }
 
-export default new Vuex.Store({
+const store = new Vuex.Store({
     state: estado,
     mutations,
     actions,
-    getters
+    getters,
+    plugins: [new VuexPersistence().plugin]
 })
+
+export default store
